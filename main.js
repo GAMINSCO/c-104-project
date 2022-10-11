@@ -20,3 +20,18 @@ classifier = ml5.imageClassifier("https://teachablemachine.withgoogle.com/models
 function model_loaded() {
     console.log("model loaded!");
 }
+
+function recognise() {
+    img = document.getElementById('output_image')
+    classifier.classify(img, results)
+}
+
+function results(error, result) {
+    if (error) {
+        console.error(error)
+    } else {
+        console.log(result)
+        document.getElementById("recognition_accuracy").innerHTML = result[0].confidence.toFixed(2)
+        document.getElementById("recognition_name").innerHTML = result[0].label
+    }
+}
